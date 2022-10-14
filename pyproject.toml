@@ -1,0 +1,41 @@
+[tool.poetry]
+name = "data_diff_ext"
+version = "0.0.1"
+description = "`data_diff_ext` is a Meltano utility extension."
+authors = ["Pat Nadolny"]
+license = "Apache 2.0"
+
+[tool.poetry.dependencies]
+python = "<3.11,>=3.7"
+structlog = "^21.2.0"
+PyYAML = "^6.0.0"
+pydantic = "^1.9.0"
+click = "^8.1.3"
+typer = "^0.6.1"
+"meltano.edk"= {git = "https://github.com/meltano/edk.git", rev="main"}
+data-diff = "^0.2.8"
+
+[tool.poetry.dev-dependencies]
+black = "^22.3.0"
+isort = "^5.10.1"
+flake8 = "^3.9.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.8"]
+build-backend = "poetry.core.masonry.api"
+
+packages = [
+    { include = "data_diff_ext" }
+    # uncomment this if you want to include static assets
+    # { include = "files_data_diff_ext.*" }
+]
+
+# If you need to static assets with your extension, you can add them here.
+# Under a directory path of "files_data_diff_ext/"
+#include = [
+#    "files_data_diff_ext/somefile.thing"
+#]
+
+[tool.poetry.scripts]
+data_diff_extension = 'data_diff_ext.main:app'
+data_diff_invoker = 'data_diff_ext.pass_through:pass_through_cli'
