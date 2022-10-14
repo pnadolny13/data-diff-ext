@@ -71,6 +71,20 @@ def describe(
         )
         sys.exit(1)
 
+@app.command()
+def diff_dbt_tables(
+    output_format: DescribeFormat = typer.Option(
+        DescribeFormat.text, "--format", help="Output format"
+    )
+) -> None:
+    """Describe the available commands of this extension."""
+    try:
+        typer.echo(ext.dbt_diff_tables())
+    except Exception:
+        log.exception(
+            "describe failed with uncaught exception, please report to maintainer"
+        )
+        sys.exit(1)
 
 @app.callback(invoke_without_command=True)
 def main(
